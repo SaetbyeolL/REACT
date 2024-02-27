@@ -9,33 +9,31 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    function Title() {
-      return (
-        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-          Hello I'm a title
-        </h3>
-      );
-    };
-    const Button = () => (
-        <button
-          style={{ backgroundColor: "tomato" }}
-          onClick={() => console.log("I'm clicked")}
-        >
-          Click me
-        </button>
-    );
-    const Container = ()=> (
-      <div>
-        <Title />
-        <Button />
-      </div>
-    );
-    ReactDOM.render(<Container/>, root); /*ReactDOM: render "span" inside "root" */
+    function App() {
+      const [counter, setCounter] = React.useState(0);
+      const onClick =()=> {
+        setCounter(counter + 1);
+      }
+
+      return(
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button onClick={onClick}>Click me</button>
+        </div>
+      )
+    }
+    ReactDOM.render(<App />, root); 
   </script>
 </html>
 
+
+
+
+
+
 <!-- 
-    // reactjs   : Engine.
+// ReactDOM   : render "span" inside "root"
+// reactjs   : Engine.
 // react-dom : react library. placing react elements in HTML 
 
 // vanillaJS : creating HTML -> manipulating html using Javascript 
@@ -47,9 +45,13 @@
 // browser don't understand JSX 
 // babel: transfer JSX into form which browser understand  
 
-//component: first letter should be capital
+// component: first letter should be capital
 
 // function Title(){return()} = 
 // const Title = () => ()
 
+// state: Where data is stored in react. changing data
+// variable: where data is stored
+// useState(): [data, function]
+// 'function': change data and then rerender 
 -->
