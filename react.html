@@ -12,7 +12,10 @@
     function App() {
       const [counter, setCounter] = React.useState(0);
       const onClick =()=> {
-        setCounter(counter + 1);
+        //setCounter(counter + 1);
+        setCounter((current) => current + 1)   // safe way
+        //if we calculate something using current value(counter), use function.
+        // we can set function as argument(current) and return value will be new state
       }
 
       return(
