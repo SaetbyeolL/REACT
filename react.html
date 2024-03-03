@@ -9,30 +9,53 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
+
     function App() {
-      const [counter, setCounter] = React.useState(0);
-      const onClick =()=> {
-        //setCounter(counter + 1);
-        setCounter((current) => current + 1)   // safe way
-        //if we calculate something using current value(counter), use function.
-        // we can set function as argument(current) and return value will be new state
+      const [amount, setAmount] = React.useState(0);
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset = () => setAmount(0);
+      const onInvert = () => {
+        reset();
+        setInverted((current)=> !current);
       }
 
-      return(
+      return (
         <div>
-          <h3>Total clicks: {counter}</h3>
-          <button onClick={onClick}>Click me</button>
+          <h1 className="hi">Super Converter</h1>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={inverted ? amount * 60 : amount}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange}
+              disabled={inverted === true}
+            />
+          </div>
+          <div>
+            {""}
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={inverted ? amount : Math.round(amount / 60)}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+              disabled = {inverted === false}
+              onChange={onChange}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onInvert}>{inverted ? "Turn back" : "Invert"}</button>
         </div>
-      )
+      );
     }
-    ReactDOM.render(<App />, root); 
+    ReactDOM.render(<App />, root);
   </script>
 </html>
-
-
-
-
-
 
 <!-- 
 // ReactDOM   : render "span" inside "root"
@@ -57,4 +80,9 @@
 // variable: where data is stored
 // useState(): [data, function]
 // 'function': change data and then rerender 
+
+// onChange<input> : state update when user input new value
+// 
+
+
 -->
